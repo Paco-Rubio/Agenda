@@ -1263,4 +1263,5 @@ def phone():
 languageconfig = setting()
 langconfig = str(languageconfig[4])
 
+clean()
 choose() 
