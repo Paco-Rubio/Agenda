@@ -43,7 +43,6 @@ if not exists("Agenda.txt"):
     agendafile = open("Agenda.txt", "w+")
     agendafile.close()
 
-
 def choose():
     if not langconfig == "spanish":
 
@@ -148,7 +147,6 @@ def choose():
             print(" Esa no es una opción posible")
             choose()
 
-
 def restart():
     if not langconfig == "spanish":
 
@@ -251,7 +249,6 @@ def restart():
             print()
             print(" Esa no es una opción posible")
             restart()
-
 
 def addtofile():
     print()
@@ -530,7 +527,6 @@ def addtofile():
     file.close()
     restart()
 
-
 def searchinfile():
     file = open("Agenda.txt", "r", encoding="utf-8")
     print()
@@ -604,7 +600,6 @@ def searchinfile():
 
     file.close()
     restart()
-
 
 def daysleft():
     print()
@@ -729,7 +724,6 @@ def daysleft():
                     print(" No se encontró el nombre o la fecha (O era incorrecto)")
                 daysleft()
 
-
 def finish():
     print()
     if not langconfig == "spanish":
@@ -748,11 +742,9 @@ def finish():
     time.sleep(0.7)
     quit()
 
-
 def clean():
     os.system("cls")
     choose()
-
 
 def age():
     print()
@@ -865,7 +857,6 @@ def age():
                     print(" No se encontró el nombre o la fecha (O era incorrecto)")
                 age()
 
-
 def openfile():
     print()
     if not langconfig == "spanish":
@@ -897,7 +888,6 @@ def openfile():
             print(" Ese archivo no está disponible")
         openfile()
 
-
 def countlines():
     file = open("Agenda.txt", "r", encoding="utf-8")
     s = " "
@@ -926,7 +916,6 @@ def countlines():
         else:
             print(" Hay " + str(countlines) + " líneas en el documento")
     restart()
-
 
 def copyline():
     print()
@@ -968,7 +957,6 @@ def copyline():
 
     file.close()
     restart()
-
 
 def mail():
     file = open("Agenda.txt", "r", encoding="utf-8")
@@ -1033,13 +1021,11 @@ def mail():
             print(" No se encontró el nombre o mail")
         mail()
 
-
 def setting():
     with open("config.txt") as settingsfile:
         settings = list(settingsfile)[0::2]
     settings = ([s.replace('\n', '') for s in settings])
     return settings
-
 
 def birthday():
     print()
@@ -1109,7 +1095,6 @@ def birthday():
         else:
             print(" No se encontró el nombre o la fecha (O era incorrecto)")
         birthday()
-
 
 def run():
     print()
@@ -1206,7 +1191,6 @@ def run():
             print(" Ese programa no está disponible ")
         run()
 
-
 def phone():
     file = open("Agenda.txt", "r", encoding="utf-8")
     phonepattern = r"\d\d\d\d\d\d\d\d\d"
@@ -1266,7 +1250,6 @@ def phone():
         else:
             print(" No se encontró el nombre o número de teléfono")
         mail()
-
 
 languageconfig = setting()
 langconfig = str(languageconfig[4])
