@@ -7,7 +7,7 @@ import webbrowser
 
 def on_click(icon, item):
     if str(item) == "Agenda":
-        os.system("cd C:/Jorge/Programming/Agenda")
+        #os.system("cd C:/Jorge/Programming/Agenda")
         os.startfile(r"C:\Jorge\Programming\Agenda\Agenda.py")
     elif str(item) == "Birthdays":
         os.startfile(r"C:\Jorge\Programming\Agenda\BirthdaysCheck.pyw")
