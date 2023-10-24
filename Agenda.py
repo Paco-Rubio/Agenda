@@ -1,10 +1,10 @@
 import os
-from datetime import date
-import time
 import re
+import time
 import pyperclip
-import math
 import webbrowser
+from datetime import date
+# from colorama import Fore
 from os.path import exists
 
 # from win10toast import ToastNotifier
@@ -372,7 +372,7 @@ def addtofile():
                     file = open("Agenda.txt", "a+")
                     print()
                     isdone = True
-                except:
+                except ValueError:
                     print()
                     if not langconfig == "spanish":
                         print(" That's not a valid date")
@@ -551,15 +551,14 @@ def searchinfile():
     while s:
         s = file.readline()
         l_str = str(re.split("[ -]", s))
-        count = str(rawcount)
         if re.search(word, l_str):
             if s == "":
                 linets.append(rawcount - 1)
             else:
                 if not langconfig == "spanish":
-                    print(" Line " + count + ":" + s)
+                    print(" Line " + str(rawcount) + ":" + s)
                 else:
-                    print(" Línea" + count + ":" + s)
+                    print(" Línea" + str(rawcount) + ":" + s)
                 linets.append(rawcount - 1)
         rawcount = rawcount + 1
 
@@ -661,7 +660,7 @@ def daysleft():
                 else:
                     print(" Quedan " + result_days_str + " días")
             restart()
-        except:
+        except ValueError:
             w = " "
             nameline = ""
             rawchosennamedays = rawchosendate.title()
@@ -766,7 +765,6 @@ def age():
             print(" No se encontró el nombre o la fecha (O era incorrecto)")
         daysleft()
     else:
-        year = today.year
         try:
             year, month, day = map(int, rawagedate.split("-"))
             agedate = date(year, month, day)
@@ -778,8 +776,6 @@ def age():
             resultage_days_left_int_raw = resultage_days_int_raw - (resultage_int * 365.1)
             resultage_months_left_raw = resultage_days_left_int_raw // 30.4375
             resultage_months_left = str(int(resultage_months_left_raw))
-            resultage_days_left_int_raw = resultage_days_left_int_raw - (resultage_months_left_raw * 30.4375)
-            resultage_days_left = str(math.trunc(resultage_days_left_int_raw))
             if resultage_int < 0:
                 print()
                 if not langconfig == "spanish":
@@ -795,18 +791,18 @@ def age():
             elif resultage_int > 0:
                 print()
                 if not langconfig == "spanish":
-                    print(" The age is " + (resultage_str) + " years and " + (resultage_months_left) + " months")
+                    print(" The age is " + resultage_str + " years and " + resultage_months_left + " months")
                 else:
-                    print(" La edad es " + (resultage_str) + " años y " + (resultage_months_left) + " meses")
+                    print(" La edad es " + resultage_str + " años y " + resultage_months_left + " meses")
             restart()
-        except:
+        except ValueError:
             q = " "
             namelineq = ""
             rawagedateq = rawagedate.title()
             agedateq = " " + rawagedateq + " "
             file = open("Agenda.txt", "r", encoding="utf-8")
             searchagepattern = r"\d{4}\-\d{2}\-\d{2}"
-            while (q):
+            while q:
                 q = file.readline()
                 if re.search(agedateq, q):
                     namelineq = q
@@ -815,7 +811,7 @@ def age():
                 rawrawagedatematch = re.search(searchagepattern, namelineq)
                 rawagedatematch = rawrawagedatematch.group()
                 agedatematch = rawagedatematch.split("-")
-                rawyear, rawmonth, rawday = (agedatematch)
+                rawyear, rawmonth, rawday = agedatematch
                 year = int(rawyear)
                 month = int(rawmonth)
                 day = int(rawday)
@@ -828,8 +824,6 @@ def age():
                 resultage_days_left_int_raw = resultage_days_int_raw - (resultage_int * 365.1)
                 resultage_months_left_raw = resultage_days_left_int_raw // 30.4375
                 resultage_months_left = str(int(resultage_months_left_raw))
-                resultage_days_left_int_raw = resultage_days_left_int_raw - (resultage_months_left_raw * 30.4375)
-                resultage_days_left = str(math.trunc(resultage_days_left_int_raw))
                 if resultage_int < 0:
                     print()
                     if not langconfig == "spanish":
@@ -845,9 +839,9 @@ def age():
                 elif resultage_int > 0:
                     print()
                     if not langconfig == "spanish":
-                        print(" The age is " + (resultage_str) + " years and " + (resultage_months_left) + " months")
+                        print(" The age is " + resultage_str + " years and " + resultage_months_left + " months")
                     else:
-                        print(" La edad es " + (resultage_str) + " años y " + (resultage_months_left) + " meses")
+                        print(" La edad es " + resultage_str + " años y " + resultage_months_left + " meses")
                 restart()
             else:
                 print()
@@ -893,7 +887,7 @@ def countlines():
     s = " "
     rawcountlines = 0
 
-    while (s):
+    while s:
         s = file.readline()
         rawcountlines = rawcountlines + 1
 
@@ -947,7 +941,7 @@ def copyline():
                 print(" Line copied")
             else:
                 print(" Línea copiada")
-        except:
+        except IndexError:
             print()
             if not langconfig == "spanish":
                 print(" Couldn't find that line")
@@ -975,7 +969,7 @@ def mail():
 
     chosennamemail = " " + rawchosennamemail.title() + " "
     namemailline = " "
-    while (w):
+    while w:
         w = file.readline()
         if re.search(chosennamemail, w):
             namemailline = w
@@ -1045,9 +1039,7 @@ def birthday():
     chosennamedays = " " + rawchosennamedays + " "
     file = open("Agenda.txt", "r", encoding="utf-8")
     searchdayspattern = r"\-\d{2}\-\d{2}"
-    rawmonth = ""
-    rawday = ""
-    while (w):
+    while w:
         w = file.readline()
         if re.search(chosennamedays, w):
             nameline = w
@@ -1066,7 +1058,7 @@ def birthday():
             datematch = rawdatematch.split("-")
             file.close()
             del datematch[0]
-            rawmonth, rawday = (datematch)
+            rawmonth, rawday = datematch
             print()
             if not langconfig == "spanish":
                 nametoadd = input(" What name do you want this date to be associated with? ")
@@ -1218,7 +1210,7 @@ def phone():
 
     chosennamephone = " " + rawchosennamephone.title() + " "
     namephoneline = " "
-    while (w):
+    while w:
         w = file.readline()
         if re.search(chosennamephone, w):
             namephoneline = w

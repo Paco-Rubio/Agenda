@@ -9,8 +9,11 @@ File.bat
 Todoist.bat
 .venv/
 .vscode/
-output/
 Whatsapp.lnk
 Outlook.lnk
 Gmail.lnk
 Todoist.lnk
+/Agenda.bat
+.idea/Agenda.iml
+.idea/inspectionProfiles/Custom_IDE.xml
+.idea/inspectionProfiles/profiles_settings.xml
